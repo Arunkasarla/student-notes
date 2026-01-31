@@ -1,0 +1,339 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f7fbf7;
+}
+
+/* NAVBAR */
+.navbar-custom {
+  background: linear-gradient(90deg, #3ebbf1fa, #9f26db);
+  padding: 12px 20px;
+}
+
+.navbar-custom a {
+  color: white;
+  margin-right: 15px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.navbar-custom a:hover {
+  color: #ffb347;
+}
+
+/* HERO SECTION */
+.hero {
+  background: linear-gradient(
+    135deg,
+    #ff7a00,
+    #6f2da8,
+    #2bd19f
+  );
+  color: white;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 18px;
+  max-width: 700px;
+  margin: auto;
+}
+
+/* BUTTONS */
+.btn-main {
+  background-color: #ff7a00;
+  border: none;
+  padding: 10px 22px;
+  color: white;
+  font-size: 16px;
+  border-radius: 6px;
+  margin: 20px;
+}
+
+.btn-main:hover {
+  background-color: #e56c00;
+}
+
+/* CARDS */
+.card-custom {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+/* ===== Sticky Footer Layout ===== */
+
+html, body, #root {
+  height: 100%;
+}
+
+.app-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+}
+/* =========================
+   ANIMATIONS & HOVER EFFECTS
+   ========================= */
+
+/* Navbar link hover */
+.navbar-custom a {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.navbar-custom a::after {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -4px;
+  background-color: #ffb347;
+  transition: width 0.3s ease;
+}
+
+.navbar-custom a:hover::after {
+  width: 100%;
+}
+
+/* Button hover animation */
+.btn-main {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-main:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Card hover animation */
+.card-custom {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-custom:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Page fade-in animation */
+.fade-in {
+  animation: fadeIn 0.6s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   SIDEBAR STYLES
+   ========================= */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background: linear-gradient(
+    180deg,
+    #6f2da8,
+    #7b2cbf,
+    #2d6a4f
+  );
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 1000;
+
+  /* Mobile hidden by default */
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+/* Sidebar open (mobile) */
+.sidebar.open {
+  transform: translateX(0);
+}
+
+
+/* Overlay for mobile */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+}
+
+/* =========================
+   SIDEBAR PROFILE
+   ========================= */
+
+.sidebar-profile {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.sidebar-profile .avatar {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
+
+.sidebar-profile h4 {
+  margin: 5px 0;
+}
+
+.sidebar-profile p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+/* =========================
+   SIDEBAR MENU
+   ========================= */
+
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar-menu a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.sidebar-menu a:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.logout-btn {
+  margin-top: 20px;
+  background: #ff7a00;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background: #e66c00;
+}
+/* =========================
+   HAMBURGER BUTTON
+   ========================= */
+
+.hamburger-btn {
+  font-size: 22px;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: none;
+}
+
+/* Show hamburger only on mobile */
+@media (max-width: 768px) {
+  .hamburger-btn {
+    display: block;
+  }
+
+  .main-content {
+    margin-left: 0 !important;
+  }
+}
+/* =========================
+   NAVBAR FIX
+   ========================= */
+
+.navbar-custom {
+  height: 64px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: linear-gradient(
+    90deg,
+    #4dabf7,
+    #7b2cbf,
+    #9d4edd
+  );
+
+  color: white;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar-logo {
+  height: 36px;
+  width: auto;
+}
+
+.navbar-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.navbar-links a:hover {
+  text-decoration: underline;
+}
+
+/* Logout button in navbar */
+.logout-btn-nav {
+  background: #ff7a00;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  /* Hide links ONLY after login */
+  body.logged-in .navbar-links {
+    display: none;
+  }
+}
+
