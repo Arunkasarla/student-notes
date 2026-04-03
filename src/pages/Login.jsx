@@ -10,7 +10,7 @@ function Login() {
   try {
     console.log("Trying login...");
 
-    const res = await fetch("http://127.0.0.1/notes-api/login.php", {
+    const res = await fetch("https://studentnotes.fwh.is/login.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

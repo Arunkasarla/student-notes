@@ -8,7 +8,7 @@ function Notes() {
   const [semesterFilter, setSemesterFilter] = useState("All");
 
   useEffect(() => {
-  fetch("http://localhost/notes-api/get_notes.php")
+  fetch("https://studentnotes.fwh.is/get_notes.php")
     .then(res => res.json())
     .then(data => setNotes(data))
     .catch(err => console.error(err));

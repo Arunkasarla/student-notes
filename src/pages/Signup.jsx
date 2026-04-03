@@ -26,7 +26,7 @@ const signup = async () => {
   try {
     console.log("Sending data:", form);  // 👈 DEBUG
 
-    const res = await fetch("http://localhost/notes-api/register.php", {
+    const res = await fetch("https://studentnotes.fwh.is/register.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
