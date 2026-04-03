@@ -8,15 +8,17 @@ function Notes() {
   const [semesterFilter, setSemesterFilter] = useState("All");
 
   useEffect(() => {
-    const stored = JSON.parse(localStorage.getItem("notes")) || [];
-    setNotes(stored);
-  }, []);
+  fetch("http://localhost/notes-api/get_notes.php")
+    .then(res => res.json())
+    .then(data => setNotes(data))
+    .catch(err => console.error(err));
+}, []);
 
-  const deleteNote = (index) => {
-    const updated = notes.filter((_, i) => i !== index);
-    setNotes(updated);
-    localStorage.setItem("notes", JSON.stringify(updated));
-  };
+ // const deleteNote = (index) => {
+   // const updated = notes.filter((_, i) => i !== index);
+   // setNotes(updated);
+   // localStorage.setItem("notes", JSON.stringify(updated));
+ //}; };
 
   const filteredNotes = notes.filter((note) => {
     const matchesTitle = note.title
@@ -103,11 +105,12 @@ function Notes() {
             <p><b>Subject:</b> {note.subject}</p>
             <p><b>Semester:</b> {note.semester}</p>
 
-            <p>
-              <b>File:</b>{" "}
-              {note.fileType?.includes("pdf") ? "📕 PDF" : "📘 DOC"} —{" "}
-              {note.fileName}
-            </p>
+          <p>
+  <b>File:</b>{" "}
+  <a href={`http://localhost/notes-api/${note.file_path}`} target="_blank">
+    View File 📄
+  </a>
+</p>
 
             <Link
               to={`/notes/${index}`}
@@ -120,7 +123,7 @@ function Notes() {
             <button
               className="btn-main"
               style={{ background: "#d32f2f" }}
-              onClick={() => deleteNote(index)}
+              //onClick={() => deleteNote(index)}
             >
               Delete
             </button>

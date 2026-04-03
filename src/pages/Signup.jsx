@@ -16,15 +16,37 @@ function Signup() {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-const signup = () => {
+
+const signup = async () => {
   if (!form.email.endsWith("@gmail.com")) {
     alert("Please use a valid Gmail address");
     return;
   }
 
-  localStorage.setItem("student", JSON.stringify(form));
-  alert("Signup successful! Please login.");
-  navigate("/login");
+  try {
+    console.log("Sending data:", form);  // 👈 DEBUG
+
+    const res = await fetch("http://localhost/notes-api/register.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(form),
+    });
+
+    const data = await res.json();
+    console.log("Response:", data); // 👈 DEBUG
+
+    if (data.message === "User registered") {
+      alert("Signup successful ✅");
+      navigate("/login");
+    } else {
+      alert("Signup failed ❌");
+    }
+  } catch (error) {
+    console.error("ERROR:", error);
+    alert("Server error ❌");
+  }
 };
 
  // const signup = () => {
@@ -61,7 +83,7 @@ const signup = () => {
         <option>7</option><option>8</option>
       </select>
       <br/>
-      <button className="btn-main w-100" onClick={signup}>
+      <button className="btn-main w-100" type="button" onClick={signup}>
         Register
       </button>
     </div>

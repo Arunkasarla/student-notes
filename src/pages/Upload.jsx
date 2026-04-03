@@ -9,30 +9,37 @@ function Upload() {
   const [file, setFile] = useState(null);
   const [semester, setSemester] = useState("");
 
-const saveNote = () => {
+  const saveNote = async () => {
   if (!file) {
     alert("Please upload a file");
     return;
   }
 
-  const fileURL = URL.createObjectURL(file); // 👈 IMPORTANT
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("subject", subject);
+  formData.append("semester", semester);
+  formData.append("file", file);
 
-  const oldNotes = JSON.parse(localStorage.getItem("notes")) || [];
+  try {
+    const res = await fetch("http://localhost/notes-api/add_note.php", {
+      method: "POST",
+      body: formData,
+    });
 
-  oldNotes.push({
-    title,
-    subject,
-    semester,
-    fileName: file.name,
-    fileType: file.type,
-    fileURL: fileURL,   // 👈 store preview URL
-    uploadedAt: new Date().toLocaleString(),
-  });
+    const data = await res.json();
 
-  localStorage.setItem("notes", JSON.stringify(oldNotes));
-  navigate("/notes");
+    if (data.success) {
+      alert("Note uploaded successfully ✅");
+      navigate("/notes");
+    } else {
+      alert("Error uploading note ❌");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Server error ❌");
+  }
 };
-
 
   return (
     <div className="fade-in" style={{ padding: "40px", maxWidth: "600px", margin: "auto" }}>
