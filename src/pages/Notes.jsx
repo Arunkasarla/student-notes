@@ -74,6 +74,9 @@ useEffect(() => {
           <option>OS</option>
           <option>CN</option>
           <option>Java</option>
+          <option>Python</option>
+          <option>Devops</option>
+          <option>Ai</option>
         </select>
 
         <select
