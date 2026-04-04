@@ -18,8 +18,41 @@ function Signup() {
   };
 
 const signup = async () => {
-  if (!form.email.endsWith("@gmail.com")) {
-    alert("Please use a valid Gmail address");
+  // Validation checks
+  if (!form.name.trim()) {
+    alert("Name is required");
+    return;
+  }
+  if (!form.roll.trim()) {
+    alert("Roll number is required");
+    return;
+  }
+  if (!form.email.trim()) {
+    alert("Email is required");
+    return;
+  }
+  // More robust email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(form.email)) {
+    alert("Please enter a valid email address");
+    return;
+  }
+  if (!form.password) {
+    alert("Password is required");
+    return;
+  }
+  // Password strength validation
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+  if (!passwordRegex.test(form.password)) {
+    alert("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character");
+    return;
+  }
+  if (!form.department) {
+    alert("Please select a department");
+    return;
+  }
+  if (!form.semester) {
+    alert("Please select a semester");
     return;
   }
 
@@ -43,6 +76,7 @@ const signup = async () => {
     } else {
       alert("Signup failed ❌");
     }
+
   } catch (error) {
     console.error("ERROR:", error);
     alert("Server error ❌");
