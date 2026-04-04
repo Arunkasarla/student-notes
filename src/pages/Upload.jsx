@@ -53,6 +53,8 @@ function Upload() {
         <option>OS</option>
         <option>CN</option>
         <option>Java</option>
+        <option>devops</option>
+        <option>AI</option> 
       </select>
        
        <select
