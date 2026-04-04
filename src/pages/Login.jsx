@@ -8,9 +8,7 @@ function Login() {
 
  const login = async () => {
   try {
-    console.log("Trying login...");
-
-    const res = await fetch("https://studentnotes.fwh.is/login.php", {
+    const res = await fetch("http://localhost/notes-api/login.php", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -18,24 +16,27 @@ function Login() {
       body: JSON.stringify({ email, password }),
     });
 
-    console.log("Response status:", res.status);
-
-   // const data = await res.json();
     const text = await res.text();
-    console.log("RAW RESPONSES:", text);
+    console.log("RAW:", text);
+
+    if (!text) {
+      alert("Empty response ❌");
+      return;
+    }
+
     const data = JSON.parse(text);
 
-    console.log("Response data:", data);
-
-    if (data.message === "Login success") {
-      alert("Login successful ✅");
-      localStorage.setItem("user", JSON.stringify(data.user));
-      navigate("/notes");
-    } else {
-      alert("Invalid credentials ❌");
+   if (data.message === "Login success") {
+  localStorage.setItem("user", JSON.stringify(data.user)); // ✅ FIX
+  alert("Login successful ✅");
+  navigate("/notes");
+}
+     else {
+      alert(data.message);
     }
+
   } catch (error) {
-    console.error("LOGIN ERROR:", error);
+    console.error(error);
     alert("Server error ❌");
   }
 };

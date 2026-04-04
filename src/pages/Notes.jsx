@@ -1,14 +1,22 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Notes() {
+  const navigate = useNavigate();
   const [notes, setNotes] = useState([]);
   const [search, setSearch] = useState("");
   const [subjectFilter, setSubjectFilter] = useState("All");
   const [semesterFilter, setSemesterFilter] = useState("All");
 
+useEffect(() => {
+  const user = localStorage.getItem("user");
+  if (!user) {
+    navigate("/login");
+  }
+}, [ navigate ]);
   useEffect(() => {
-  fetch("https://studentnotes.fwh.is/get_notes.php")
+  fetch("http://localhost/notes-api/get_notes.php")
     .then(res => res.json())
     .then(data => setNotes(data))
     .catch(err => console.error(err));

@@ -22,7 +22,7 @@ function Upload() {
   formData.append("file", file);
 
   try {
-    const res = await fetch("https://studentnotes.fwh.is/add_note.php", {
+    const res = await fetch("http://localhost/notes-api/add_note.php", {
       method: "POST",
       body: formData,
     });
