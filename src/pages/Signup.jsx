@@ -41,12 +41,6 @@ const signup = async () => {
     alert("Password is required");
     return;
   }
-  // Password strength validation
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-  if (!passwordRegex.test(form.password)) {
-    alert("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character");
-    return;
-  }
   if (!form.department) {
     alert("Please select a department");
     return;
