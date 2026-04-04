@@ -76,7 +76,7 @@ const signup = async () => {
     } else if (data.message === "Email already registered") {
       alert("This email is already registered. Please use a different email or login instead.");
     } else {
-      alert("Signup failed ❌: This email is already registered. Please use a different email or login instead. " + (data.message || "Unknown error"));
+      alert("Signup failed ❌: " + (data.message || "Unknown error"));
     }
 
   } catch (error) {
