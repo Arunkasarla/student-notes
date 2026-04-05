@@ -118,7 +118,7 @@ useEffect(() => {
 
           <p>
   <b>File:</b>{" "}
-  <a href={`http://localhost/notes-api/${note.file_path}`} target="_blank">
+  <a href={`http://localhost/notes-api/uploads/${note.file}`} target="_blank">
     View File 📄
   </a>
 </p>

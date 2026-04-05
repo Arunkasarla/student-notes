@@ -10,69 +10,76 @@ function Upload() {
   const [semester, setSemester] = useState("");
 
   const saveNote = async () => {
-  if (!file) {
-    alert("Please upload a file");
-    return;
-  }
-
-  const formData = new FormData();
-  formData.append("title", title);
-  formData.append("subject", subject);
-  formData.append("semester", semester);
-  formData.append("file", file);
-
-  try {
-    const res = await fetch("http://localhost/notes-api/add_note.php", {
-      method: "POST",
-      body: formData,
-    });
-
-    const data = await res.json();
-
-    if (data.success) {
-      alert("Note uploaded successfully ✅");
-      navigate("/notes");
-    } else {
-      alert("Error uploading note ❌");
+    if (!file) {
+      alert("Please upload a file");
+      return;
     }
-  } catch (error) {
-    console.error(error);
-    alert("Server error ❌");
-  }
-};
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("subject", subject);
+    formData.append("semester", semester);
+    formData.append("file", file);
+
+    try {
+      const res = await fetch("http://localhost/notes-api/add_note.php", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      console.log("Server response:", data); // 🔥 DEBUG
+
+      if (data.message === "Upload success") {
+        alert("Note uploaded successfully ✅");
+        navigate("/notes");
+      } else {
+        alert("Error: " + (data.message || "Upload failed ❌"));
+      }
+
+    } catch (error) {
+      console.error("Fetch error:", error);
+      alert("Server error ❌");
+    }
+  };
 
   return (
-    <div className="fade-in" style={{ padding: "40px", maxWidth: "600px", margin: "auto" }}>
+    <div style={{ padding: "40px", maxWidth: "600px", margin: "auto" }}>
       <h2>Upload Notes</h2>
 
-      <input className="form-control mb-2" placeholder="Title" onChange={(e) => setTitle(e.target.value)} />
+      <input
+        className="form-control mb-2"
+        placeholder="Title"
+        onChange={(e) => setTitle(e.target.value)}
+      />
 
-      <select className="form-control mb-2" onChange={(e) => setSubject(e.target.value)}>
-        <option>Select Subject</option>
+      <select
+        className="form-control mb-2"
+        onChange={(e) => setSubject(e.target.value)}
+      >
+        <option value="">Select Subject</option>
         <option>DBMS</option>
         <option>OS</option>
         <option>CN</option>
         <option>Java</option>
-        <option>devops</option>
-        <option>AI</option> 
+        <option>Devops</option>
+        <option>Ai</option>
       </select>
-       
-       <select
-  className="form-control mb-2"
-  onChange={(e) => setSemester(e.target.value)}
->
-  <option value="">Select Semester</option>
-  <option>1</option>
-  <option>2</option>
-  <option>3</option>
-  <option>4</option>
-  <option>5</option>
-  <option>6</option>
-  <option>7</option>
-  <option>8</option>
-</select>
 
-
+      <select
+        className="form-control mb-2"
+        onChange={(e) => setSemester(e.target.value)}
+      >
+        <option value="">Select Semester</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+        <option>8</option>
+      </select>
 
       <input
         type="file"
